@@ -1,0 +1,33 @@
+server:
+   port: 8080
+spring:
+   datasource:
+      # configuração do postgres local com imagem padrão doker
+      url: jdbc:postgresql://localhost:5432/spring-apirest
+      username: postgres
+   jpa:
+      show-sql: true
+      hibernate:
+         ddl-auto: update
+         naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+   security:
+      oauth2:
+         client:
+            registration:
+               google:
+                  clientId: seu-client-id-google
+                  clientSecret: seu-secret-google
+                  redirectUri: '{baseUrl}/oauth2/callback/{registrationId}'
+                  scope:
+                  - email
+                  - profile
+app:
+   auth:
+      tokenSecret: um-secret-para-o-token
+      tokenExpirationMsec: 864000000
+   oauth2:
+      authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
